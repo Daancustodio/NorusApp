@@ -1,0 +1,61 @@
+<core:View 
+	xmlns:core="sap.ui.core"
+	xmlns="sap.uxap"
+	xmlns:l="sap.ui.layout"
+	xmlns:m="sap.m"		
+	height="100%"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	controllerName="app.controller.DashBoard">
+
+ 	<ObjectPageLayout
+	 subSectionLayout="titleOnTop"
+	 id="idApprovalsRequestPurchase"  
+	 class="sapThemePageBG-asColor"	 
+	 enableLazyLoading="false">	 
+	 <headerTitle>
+			<ObjectPageHeader objectImageURI=''
+							  id="idApprovalsRequestPurchaseHeader"
+							  objectTitle="{path:'currentUser>/U_NAME', formatter:'.fmt.formatCaptalize'}"
+							  objectImageShape="Circle"
+							  objectImageAlt="{currentUser>/U_NAME}"
+							  objectSubtitle="{currentUser>/DepartmentName}"
+							  isObjectIconAlwaysVisible="false"
+							  isObjectTitleAlwaysVisible="true"
+							  isObjectSubtitleAlwaysVisible="true">
+				<!-- <actions>
+					<ObjectPageHeaderActionButton   id="userLoggedPopOver" icon="sap-icon://customize"  press="userSettingPress"  text="{i18n>Commom.Settings}" tooltip="{i18n>Commom.Settings}" />										
+				</actions> -->
+			</ObjectPageHeader>
+		</headerTitle>	 
+		<sections >
+			<ObjectPageSection title="{i18n>Commom.Home}">
+				<ObjectPageSubSection  >
+					<blocks>
+						<l:HorizontalLayout 
+							allowWrapping="true" 
+							id="containerTile" 
+							content="{/}">
+							<m:GenericTile 
+							header="{title}" 
+							subheader="{info}"
+							app:route="{route}"
+							state="Loaded" 							
+							press="onNavRoute" class="sapUiTinyMargin">
+								<m:TileContent 
+									unit="{numberUnit}" 
+									footer="{footer}">
+									<m:NumericContent 
+									icon="{icon}" 
+									value="{number}" 
+									valueColor="{color}" 
+									indicator="{trend}" 
+									scale="{scale}" />
+								</m:TileContent>
+							</m:GenericTile>
+						</l:HorizontalLayout>
+					</blocks>
+				</ObjectPageSubSection>				
+			</ObjectPageSection>
+		</sections>
+	</ObjectPageLayout>	 
+</core:View>

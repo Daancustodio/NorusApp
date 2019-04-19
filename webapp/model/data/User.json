@@ -1,0 +1,38 @@
+{
+  "USERID": 1,
+  "USER_CODE": "manager",
+  "U_NAME": "manager",
+  "E_Mail": null,
+  "Department": -2,
+  "DepartmentName": "Geral",
+  "Branch": -2,
+  "Picture": null,
+  "Address": null,
+  "Country": null,
+  "Tel1": null,
+  "GENDER": "F",
+  "Birthday": null,
+  "objType": "12",
+  "userSign": 1,
+  "createDate": null,
+  "updateDate": "2018-05-22T00:00:00",
+  "UserSettings": {
+    "Theme": "sap_belize_plus",
+    "MaxRecordsPerSearch": 100,
+    "UserCode": "manager",
+    "Id": 1
+  },
+  "DefaultCompany": {
+    "Id": 1,
+    "CompanyDb": "SBO_FINATEC",
+    "CompanyName": "Finatec",
+    "UserName": "manager",
+    "Password": "sap@123",
+    "BusinessPlaceId": 1,
+    "BusinessPlaceName":
+      "Fundação de Empreendimentos Científicos e Tecnológicos - FINATEC",
+    "ServerType": 10,
+    "LicenseServer": null,
+    "Default": true
+  }
+}

@@ -1,0 +1,174 @@
+<mvc:View 
+	controllerName="app.controller.contrato.Edit"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+    <Page 
+	id="editContractPage"  
+	navButtonPress="onNavBack" 
+	showNavButton="true"		
+	showFooter="false"
+	>
+        <headerContent>		
+		          <Button id="cancelButton" visible="false" text="Cancelar" type="Reject" icon="sap-icon://sys-cancel" press="onCancel"></Button>
+		          <Button id="saveButton"  text="Salvar" type="Accept" icon="sap-icon://save" press="onCreate"></Button>
+		</headerContent>
+
+        <content>
+            <IconTabBar id="idIconTabBar" applyContentPadding="false" select="onChangeTab" >
+                <items>
+                    <IconTabFilter id="tabFilterAdd" key="add" icon="sap-icon://add-document" iconColor="Positive" text="{oView>/FilterLabel}">
+                        <l:Grid defaultSpan="L4 M6 S12" class="sapUiSmallMarginTop">
+                            <l:content>
+                                <Panel width="auto"  accessibleRole="Region">
+                                    <headerToolbar>
+                                        <Toolbar height="3rem">
+                                            <Title text="Informações do cliente"/>
+                                        </Toolbar>
+                                    </headerToolbar>
+                                    <content>
+                                        <VBox>
+                                            <Label  text="Nome do cliente"  />
+                                            <Input id="userName" liveChange="setShowFooter" placeholder="Nome do cliente" value="{Contract>/clientName}"></Input>
+                                        </VBox>
+                                    </content>
+                                </Panel>
+                                <Panel width="auto"  accessibleRole="Region">
+                                    <headerToolbar>
+                                        <Toolbar height="3rem">
+                                            <Title text="Tipo de contrato e valor"/>
+                                        </Toolbar>
+                                    </headerToolbar>
+                                    <content>
+                                        <VBox>
+                                            <Label  text="Tipo do Contrato (Compra e Venda)"  />
+                                            <Select										
+										selectedKey="{Contract>/type}"										                      
+										items="{path: 'oContractTypes>/', templateShareable:false}">
+                                                <core:Item key="{oContractTypes>Id}"  text="{oContractTypes>Description}" />
+                                            </Select>
+                                            <Label  text="Quantidade negociada"  />
+                                            <Input 
+											 liveChange="setShowFooter"
+											textAlign="Right"
+											id="quantity"
+											type="Text"
+											placeholder="Quantidade negociada" 
+											value="{Contract>/quantity}"></Input>
+                                            <Label  text="Valor negociado"  />
+                                            <Input 
+										id="value"
+										textAlign="Right"
+										type="Text"
+										liveChange="setShowFooter"										
+										value="{
+											path: 'Contract>/value',
+											type: 'sap.ui.model.type.Float',
+											formatOptions: {
+												maxFractionDigits: 2,												
+												minFractionDigits: 2												
+											}											
+										}"
+										 />
+                                        </VBox>
+                                    </content>
+                                </Panel>
+                                <Panel width="auto"  accessibleRole="Region">
+                                    <headerToolbar>
+                                        <Toolbar height="3rem">
+                                            <Title text="Início e duração"/>
+                                        </Toolbar>
+                                    </headerToolbar>
+                                    <content>
+                                        <VBox>
+                                            <Label text="Mês e Ano de início" />
+                                            <Input 
+											id="startMonth"
+										textAlign="Right"
+										liveChange="setShowFooter"
+										type="Month" 
+										value="{Contract>/startMonth}"></Input>
+                                            <Label  text="Duração em meses do contrato"  />
+                                            <Input  
+											id="months"
+										liveChange="setShowFooter"
+										textAlign="Right"
+										type="Text"
+										maxLength="2" 
+										placeholder="" value="{Contract>/months}"></Input>
+                                        </VBox>
+                                    </content>
+                                </Panel>
+                            </l:content>
+                        </l:Grid>
+                    </IconTabFilter>
+                    <IconTabSeparator />
+                    <IconTabFilter key="list" icon="sap-icon://activity-items"  text="{i18n>Commom.Contracts}">
+                        <List
+									showUnread="true"
+									id="idList"
+									items="{Contracts>/}"
+									selectionChange="onSelectionChange"
+									mode="MultiSelect"
+									includeItemInSelection="true" >
+                            <headerToolbar>
+                                <Toolbar>
+                                    <Title text="Contratos" level="H2" />
+                                    <ToolbarSpacer />
+
+                                    <Button
+										id="edit"
+										enabled="false"
+										icon="sap-icon://edit"
+										tooltip="Editar"
+										press="onEdit" />
+                                    <Button
+										id="exportar"
+										enabled="false"
+										icon="sap-icon://pdf-reader"
+										tooltip="Exportar PDF"
+										press="onExport" />
+                                    <Button
+										id="excluir"
+										enabled="false"
+										icon="sap-icon://delete"
+										tooltip="Excluir"
+										press="onDelete" />
+                                </Toolbar>
+                            </headerToolbar>
+                            <items>
+                                <StandardListItem
+											unread="{Contracts>unread}"
+											title="Contrato com {Contracts>clientName}, iniciado em {path: 'Contracts>startMonth',
+												type: 'sap.ui.model.type.DateTime',
+												formatOptions: {
+												source: {
+													pattern: 'yyyy-MM'
+												},
+												pattern: 'MM/yyyy'
+												}
+											} com custo total de R$: 
+											{
+												path: 'Contracts>value',
+												type: 'sap.ui.model.type.Float',
+												formatOptions: {
+													maxFractionDigits: 2,												
+													minFractionDigits: 2												
+												}											
+											} e duração de {Contracts>months} meses" 
+											description="Código do contrato: {Contracts>id} "
+											icon="sap-icon://activity-individual"
+											iconDensityAware="false"
+
+											iconInset="true" />
+                            </items>
+                        </List>
+                    </IconTabFilter>
+                    <IconTabSeparator />
+                </items>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>

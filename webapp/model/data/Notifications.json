@@ -1,0 +1,102 @@
+[
+  {
+    "AlertCode": 16374,
+    "UserSign": 1,
+    "Opened": "Y",
+    "RecDate": "2018-04-18T00:00:00",
+    "RecFullDate": "2018-04-18T13:42:00",
+    "RecTime": 1342,
+    "WasRead": "N",
+    "Deleted": "N",
+    "Failed": "N",
+    "Message": {
+      "Code": 16374,
+      "Type": "M",
+      "Priority": "1",
+      "TCode": null,
+      "Subject": "Fim do processo de aprovação do documento",
+      "UserText": null,
+      "DataCols": 3,
+      "DataParams":
+        "Nº do esboço                  YTipo de documento             NModelo de autorização         Y",
+      "MsgData":
+        "2783\t140\t76\tContas a pagar\tAut. Pagamento      \t121\t4\r\n",
+      "UserSign": 23,
+      "UserName": "JEFFERSON",
+      "Attachment": null,
+      "DataSource": "N",
+      "AtcEntry": null,
+      "AltType": "N"
+    }
+  },
+  {
+    "AlertCode": 16951,
+    "UserSign": 1,
+    "Opened": "Y",
+    "RecDate": "2018-04-23T00:00:00",
+    "RecFullDate": "2018-04-23T14:17:00",
+    "RecTime": 1417,
+    "WasRead": "N",
+    "Deleted": "N",
+    "Failed": "N",
+    "Message": {
+      "Code": 16951,
+      "Type": "M",
+      "Priority": "1",
+      "TCode": null,
+      "Subject": "Geração do documento pelo autorizador",
+      "UserText": null,
+      "DataCols": 2,
+      "DataParams":
+        "Nº do esboço                  YTipo de documento             N",
+      "MsgData": "3270\t46\t3270\tContas a pagar\r\n",
+      "UserSign": 38,
+      "UserName": "ELIZETE",
+      "Attachment": null,
+      "DataSource": "N",
+      "AtcEntry": null,
+      "AltType": "N"
+    }
+  },
+  {
+    "AlertCode": 17103,
+    "UserSign": 1,
+    "Opened": "Y",
+    "RecDate": "2018-04-24T00:00:00",
+    "RecFullDate": "2018-04-24T09:53:00",
+    "RecTime": 953,
+    "WasRead": "N",
+    "Deleted": "N",
+    "Failed": "N",
+    "Message": {
+      "Code": 17103,
+      "Type": "M",
+      "Priority": "1",
+      "TCode": null,
+      "Subject": "Geração do documento pelo autorizador",
+      "UserText": null,
+      "DataCols": 2,
+      "DataParams":
+        "Nº do esboço                  YTipo de documento             N",
+      "MsgData": "3291\t46\t3291\tContas a pagar\r\n",
+      "UserSign": 21,
+      "UserName": "CÁSSIA CASTRO",
+      "Attachment": null,
+      "DataSource": "N",
+      "AtcEntry": null,
+      "AltType": "N"
+    }
+  },
+  {
+    "AlertCode": 30,
+    "UserSign": 1,
+    "Opened": "Y",
+    "RecDate": "2018-04-25T00:00:00",
+    "RecFullDate": "2018-04-25T11:07:00",
+    "RecTime": 1107,
+    "WasRead": "N",
+    "Deleted": "N",
+    "Failed": "N",
+    "Message": null
+  }
+]

@@ -1,0 +1,13 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core">
+	<ResponsivePopover id="userLoggedPopOverId" title="{i18n>Commom.Menu.Logged}" class="sapUiPopupWithPadding" placement="Left">		
+		<endButton>
+			<Button   type="Reject" class="sapUiSmallMargin" id="userLogOutButton" text="{i18n>Commom.LogOut}"  press="onLogOut" />
+		</endButton>
+		<content>
+			<VBox>
+				<Text text="{currentUser>/U_NAME}"  />
+				<Button icon="sap-icon://customize"  press="userSettingPress"  text="{i18n>Commom.Settings}" tooltip="{i18n>Commom.Settings}" type="Emphasized"/>					
+			</VBox>
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>
