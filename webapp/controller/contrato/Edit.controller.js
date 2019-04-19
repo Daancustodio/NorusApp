@@ -56,7 +56,7 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
         },
         onExportPdf(){
             window.open(this.pdfUrl,"_blank");
-            this.load();
+            
         },
         enableExpordAndExclude(){
             let selectionCount =this.byId("idList").getSelectedContexts().length;
