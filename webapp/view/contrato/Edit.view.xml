@@ -139,8 +139,7 @@
                                 </Toolbar>
                             </headerToolbar>
                             <items>
-                                <StandardListItem
-                                            blocked="true"
+                                <StandardListItem                                            
 											unread="{Contracts>unread}"
 											title="Contrato com {Contracts>clientName}, iniciado em {path: 'Contracts>startMonth',
 												type: 'sap.ui.model.type.DateTime',
