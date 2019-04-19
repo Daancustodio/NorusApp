@@ -52,8 +52,7 @@
 										enabled="false"
 										icon="sap-icon://pdf-attachment"
 										tooltip="Exportar"
-                                        text="Exportar PDF"
-										press="onExportPdf" />
+                                       	press="onExportPdf" />
                                     
                                 </Toolbar>
                             </headerToolbar>
