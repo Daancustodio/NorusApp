@@ -1,13 +1,4 @@
 .sapUiSizeCompact .sapMSLIIconThumb, .sapUiSizeCompact .sapMSLIDescNoIcon, .sapUiSizeCompact .sapMSLIDescIcon{
-	min-height: 7rem !important;
-	height: 7rem !important;
-}
-
-.sapMSLITitle, .sapMSLITitleOnly, .sapMSLIDescription{
-	white-space: normal !important;
-}
-.imgLogo{
-	margin: 0 auto;
-	display: block;
-	max-width: 50%;
+	min-height: 15rem !important;
+	height: 15rem !important;
 }

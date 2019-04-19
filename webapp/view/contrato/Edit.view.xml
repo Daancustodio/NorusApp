@@ -60,7 +60,7 @@
                             <items>
                                 <StandardListItem                                            
 											unread="{Contracts>unread}"
-											title="Contrato com {Contracts>clientName}, iniciado em {path: 'Contracts>startMonth',
+											title="{Contracts>clientName}, iniciado em {path: 'Contracts>startMonth',
 												type: 'sap.ui.model.type.DateTime',
 												formatOptions: {
 												source: {
@@ -68,7 +68,7 @@
 												},
 												pattern: 'MM/yyyy'
 												}
-											} com custo total de R$: 
+											} custo total de R$: 
 											{
 												path: 'Contracts>contractTotal',
 												type: 'sap.ui.model.type.Float',
@@ -76,8 +76,8 @@
 													maxFractionDigits: 2,												
 													minFractionDigits: 2												
 												}											
-											} e duração de {Contracts>months} meses" 
-											description="Código do contrato: {Contracts>id} "
+											}" 
+											description="R$ {Contracts>contractTotal} "
 											icon="sap-icon://activity-individual"
 											iconDensityAware="false"
 
