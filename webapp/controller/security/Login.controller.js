@@ -29,13 +29,7 @@ sap.ui.define(
 			this.onFakeLogin(oEvent);
 			return;
 			
-			let loginButton =this.byId("loginButton");
-			if(loginButton.getBusy()) return;				
 			
-			loginButton.setBusy(true);
-			this.UserCredentials.UserName = this.byId("userName").getValue();
-			this.UserCredentials.Password = this.byId("userPass").getValue();				
-			this.getToken(this.UserCredentials, loginButton); 
 		},
 
 		onFakeLogin : function(oEvent){
@@ -44,17 +38,28 @@ sap.ui.define(
 			
 			loginButton.setBusy(true);
 			this.UserCredentials.UserName = this.byId("userName").getValue();
-			this.UserCredentials.Password = this.byId("userPass").getValue();	
-			let serverURL = this.getServerUrl(this.api.user);			
-			let model = new RestModel(serverURL);
-			model.attachRequestCompleted(response => {				
-				let data = response.getSource().getData();				
-				this.setUserSessionToken("thisIsAFakeToken");										
-				this.setUserModel(data);										
-				this.setUserSession(data);										
+			this.UserCredentials.Password = this.byId("userPass").getValue();
+			this.UserCredentials.Company = "Norus"
+			setTimeout(()=>{
+
+				if(this.UserCredentials.UserName.split(" ").length < 2 )
+				{
+					MessageToast.show("Informe o nome e sobrenome");										
+				} else if(this.UserCredentials.Password.toLowerCase() != "norus")
+				{
+					MessageToast.show("Senha incorreta");
+					
+				}else{				
+					this.setUserSessionToken("thisIsAFakeToken");										
+					this.setUserModel(this.UserCredentials);										
+					this.setUserSession(this.UserCredentials);										
+					this.setBusyLogin(false);					
+					this.redirectIfLogged(); 				
+					this.setBusyLogin(false);					
+				}
+
 				this.setBusyLogin(false);					
-				this.redirectIfLogged(); 
-			});			
+			},1300)
 		},
 
         setUserSession: function (user) {										
@@ -66,64 +71,11 @@ sap.ui.define(
 			this.byId("loginButton").setBusy(bBusy);
 		},
 
-		getToken : function(userCredentials){
-			
-            var sInvalidUserMessage = this.getText("invalidUser");
-			
-            if (!userCredentials || !userCredentials.UserName || !userCredentials.Password){
-				MessageToast.show(sInvalidUserMessage);
-				this.setBusyLogin(false);
-				return;
-			}
-			
-			userCredentials.grant_type = 'password';
-			var serveURL = this.getServeUrl(this.api.token);
-			var apiRequest = new RestModel();			   
-			apiRequest.request(
-				serveURL, 
-				userCredentials,
-				data => this.getUserData(userCredentials, data),
-				err => {
-					let erro = err.response;
-
-				    console.log(erro)
-					this.showExeption(erro);
-					this.setBusyLogin(false);
-				},
-				"POST",
-				"json"
-			);			  
-		},
-
+		
 		setUserSessionToken : function(userAcessToken){
 			sessionStorage.setItem('currentUserToken', userAcessToken);
 		},
-
-		getUserData: function(userCredentials, responseToken){
-			this.setUserSessionToken(responseToken.access_token);
-			var serveURL = this.getServerUrl(this.api.user , userCredentials.UserName);			
-			var apiRequest = new RestModel();	
-			
-			apiRequest.request(
-				serveURL, 
-				userCredentials,
-				data => {
-					console.log(data);
-					this.setUserModel(data);
-					this.setUserSession(data);
-					this.setBusyLogin(false);					
-					this.redirectIfLogged();  
-				},
-				err => {
-					
-					this.showExeption({error_description: err.response.Message, error:err.message});
-					this.setBusyLogin(false);
-				},
-				"get",
-				"json"
-			);		
-		},
-
+		
 		setUserModel : function(user){
 			var userModel = new RestModel();
             userModel.setData(user);

@@ -19,6 +19,73 @@
         <content>
             <IconTabBar id="idIconTabBar" applyContentPadding="false" select="onChangeTab" >
                 <items>
+                    
+                    <IconTabSeparator />
+                    <IconTabFilter key="list" icon="sap-icon://activity-items"  text="{i18n>Commom.Contracts}">
+                        <List   
+                        noDataText="Nenhum contrato criado."
+									showUnread="true"
+									id="idList"
+									items="{Contracts>/}"
+									selectionChange="onSelectionChange"
+									mode="MultiSelect"
+									includeItemInSelection="true" >
+                            <headerToolbar>
+                                <Toolbar>
+                                    <CheckBox text="Selecionar Todos" select="onSelectAll" />
+                                    <ToolbarSpacer />
+
+                                    <Button
+										id="edit"
+										enabled="false"
+										icon="sap-icon://edit"
+										tooltip="Editar"
+										press="onEdit" />
+                                    <Button
+										id="excluir"
+										enabled="false"
+										icon="sap-icon://delete"
+										tooltip="Excluir"
+										press="onDelete" />
+                                    <Button										
+                                        id="exportar"
+										enabled="false"
+										icon="sap-icon://pdf-attachment"
+										tooltip="Exportar"
+                                        text="Exportar PDF"
+										press="onExportPdf" />
+                                    
+                                </Toolbar>
+                            </headerToolbar>
+                            <items>
+                                <StandardListItem                                            
+											unread="{Contracts>unread}"
+											title="Contrato com {Contracts>clientName}, iniciado em {path: 'Contracts>startMonth',
+												type: 'sap.ui.model.type.DateTime',
+												formatOptions: {
+												source: {
+													pattern: 'yyyy-MM'
+												},
+												pattern: 'MM/yyyy'
+												}
+											} com custo total de R$: 
+											{
+												path: 'Contracts>contractTotal',
+												type: 'sap.ui.model.type.Float',
+												formatOptions: {
+													maxFractionDigits: 2,												
+													minFractionDigits: 2												
+												}											
+											} e duração de {Contracts>months} meses" 
+											description="Código do contrato: {Contracts>id} "
+											icon="sap-icon://activity-individual"
+											iconDensityAware="false"
+
+											iconInset="true" />
+                            </items>
+                        </List>
+                    </IconTabFilter>
+                    <IconTabSeparator />
                     <IconTabFilter id="tabFilterAdd" key="add" icon="sap-icon://add-document" iconColor="Positive" text="{oView>/FilterLabel}">
                         <l:Grid defaultSpan="L4 M6 S12" class="sapUiSmallMarginTop">
                             <l:content>
@@ -43,7 +110,7 @@
                                     </headerToolbar>
                                     <content>
                                         <VBox>
-                                            <Label  text="Tipo do Contrato (Compra e Venda)"  />
+                                            <Label  text="Tipo do Contrato (Compra/Venda)"  />
                                             <Select										
 										selectedKey="{Contract>/type}"										                      
 										items="{path: 'oContractTypes>/', templateShareable:false}">
@@ -104,69 +171,6 @@
                             </l:content>
                         </l:Grid>
                     </IconTabFilter>
-                    <IconTabSeparator />
-                    <IconTabFilter key="list" icon="sap-icon://activity-items"  text="{i18n>Commom.Contracts}">
-                        <List
-									showUnread="true"
-									id="idList"
-									items="{Contracts>/}"
-									selectionChange="onSelectionChange"
-									mode="MultiSelect"
-									includeItemInSelection="true" >
-                            <headerToolbar>
-                                <Toolbar>
-                                    <Title text="Contratos" level="H2" />
-                                    <ToolbarSpacer />
-
-                                    <Button
-										id="edit"
-										enabled="false"
-										icon="sap-icon://edit"
-										tooltip="Editar"
-										press="onEdit" />
-                                    <Button
-										id="exportar"
-										enabled="false"
-										icon="sap-icon://pdf-reader"
-										tooltip="Exportar PDF"
-										press="onCreatePdf" />
-                                    <Button
-										id="excluir"
-										enabled="false"
-										icon="sap-icon://delete"
-										tooltip="Excluir"
-										press="onDelete" />
-                                </Toolbar>
-                            </headerToolbar>
-                            <items>
-                                <StandardListItem                                            
-											unread="{Contracts>unread}"
-											title="Contrato com {Contracts>clientName}, iniciado em {path: 'Contracts>startMonth',
-												type: 'sap.ui.model.type.DateTime',
-												formatOptions: {
-												source: {
-													pattern: 'yyyy-MM'
-												},
-												pattern: 'MM/yyyy'
-												}
-											} com custo total de R$: 
-											{
-												path: 'Contracts>value',
-												type: 'sap.ui.model.type.Float',
-												formatOptions: {
-													maxFractionDigits: 2,												
-													minFractionDigits: 2												
-												}											
-											} e duração de {Contracts>months} meses" 
-											description="Código do contrato: {Contracts>id} "
-											icon="sap-icon://activity-individual"
-											iconDensityAware="false"
-
-											iconInset="true" />
-                            </items>
-                        </List>
-                    </IconTabFilter>
-                    <IconTabSeparator />
                 </items>
             </IconTabBar>
         </content>

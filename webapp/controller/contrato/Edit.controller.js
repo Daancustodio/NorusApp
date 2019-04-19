@@ -22,7 +22,7 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
             .getRouter()
             .getRoute('contrato')
             .attachPatternMatched(this._onRouteMatched, this);          
-            
+            this.load()
             
         }, 
         formatter : formatter,  
@@ -34,10 +34,10 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
             startMonth : "",
             months : 0
         },
-        contractURL: "http://localhost:5000/api/contract",       
-        rootApi: "http://localhost:5000/api/",        
-        //rootApi: "https://norusserver.azurewebsites.net/api/",       
-        //contractURL: "https://norusserver.azurewebsites.net/api/contract",       
+        //contractURL: "http://localhost:5000/api/contract",       
+        //rootApi: "http://localhost:5000/api/",        
+        rootApi: "https://norusserver.azurewebsites.net/api/",       
+        contractURL: "https://norusserver.azurewebsites.net/api/contract",       
         _onRouteMatched : function(oEvent){ 
             this.setModel(new RestModel(this.emptyContract
             ), "Contract") ;         
@@ -45,13 +45,18 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
                 {Id: 0, Description: "Compra"},
                 {Id: 1, Description: "Venda"}
             ]), "oContractTypes") ;  
-            this.setModel(new JSONModel({FilterLabel: "Criar"}), "oView");  
+        
+        this.setModel(new JSONModel({FilterLabel: "Criar", pdfUrl : ""}), "oView");  
            
             
         },
         onSelectionChange(oEvent){
             this.enableExpordAndExclude();                  
-            
+            this.updatePdfLink();
+        },
+        onExportPdf(){
+            window.open(this.pdfUrl,"_blank");
+            this.load();
         },
         enableExpordAndExclude(){
             let selectionCount =this.byId("idList").getSelectedContexts().length;
@@ -66,16 +71,13 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
             let model = new RestModel();
             let list = this.byId("idList");
             list.setBusy(true);            
-            this.setModel(model,"Contracts")
-            
+            this.setModel(model,"Contracts")            
             model.get(this.contractURL, data =>{
-                list.setBusy(false);
-                console.log(data)
+                list.setBusy(false);            
                 model.setData(data)
             },
             err =>{
-                list.setBusy(false);
-                
+                list.setBusy(false);                
                 this.showExeption(err);
             })
         },
@@ -167,7 +169,7 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
                 let key = oEvent.getParameters().key;                
                 let isListTab = (key == "list");  
                 this.byId("saveButton").setVisible(!isListTab);
-                let mode =    this.getModel("oView").getProperty('/FilterLabel');
+                let mode =  this.getModel("oView").getProperty('/FilterLabel');
 
                 var enableCancel = (!isListTab && mode == "Editar")
                 this.byId("cancelButton").setVisible(enableCancel);
@@ -176,7 +178,7 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
 
                 
                 this.byId("cancelButton").setVisible(false);
-                let model = this.getModel("Contracts");
+                
                 this.load()
             
         },
@@ -207,24 +209,23 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
 
         },
 
-        onCreatePdf(oEvent){            
+        updatePdfLink(){            
             let list = this.byId("idList");
             let selection = list.getSelectedContexts();
-            let data =selection.map(x=> x.getObject());
-            let model = new RestModel();
-            let url = this.rootApi + "pdf";
-            model.setData(data);
-            oEvent.getSource().setBusy(true);
-            model.post(
-                url,
-                data =>{
-                    
-                    var win = window.open("data", "Your PDF", "width=1024,height=768,resizable=yes,scrollbars=yes,toolbar=no,location=no,directories=no,status=no,menubar=no,copyhistory=no");
-                    win.document.location.href = datauri;
-                    console.log(data)
-                },
-                console.log
-            );
+            let data = selection.map(x=> x.getObject().id).join(";");
+            this.pdfUrl = this.rootApi + "pdf/" + data + "/"+ this.getUserSession().UserName;            
+        },
+        onSelectAll: function(oEvent) {
+            var otab = this.byId("idList"); 
+    
+            var bSelected = oEvent.getParameter('selected'); 
+    
+            otab.getItems().forEach(function(item) { 
+                item.setSelected(bSelected); 
+            });
+
+            this.enableExpordAndExclude();
+            this.updatePdfLink();
         }
         
         

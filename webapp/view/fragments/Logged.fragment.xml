@@ -5,8 +5,8 @@
 		</endButton>
 		<content>
 			<VBox>
-				<Text text="{currentUser>/U_NAME}"  />
-				<Button icon="sap-icon://customize"  press="userSettingPress"  text="{i18n>Commom.Settings}" tooltip="{i18n>Commom.Settings}" type="Emphasized"/>					
+				<Text text="{currentUser>/UserName}"  />
+				
 			</VBox>
 		</content>
 	</ResponsivePopover>

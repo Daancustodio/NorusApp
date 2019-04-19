@@ -11,7 +11,9 @@
 			<VBox fitContainer="true" justifyContent="Center" alignItems="Center" alignContent="Center">     
      
 				<items>
-					<!-- <Image  src="webapp/img/Logo.png" ></Image> -->    					
+					<Image  src="webapp/img/Logo.png" class="imgLogo" ></Image> 
+					
+					<Title level="H1" text="Gestão de Contratos" />
 					<Input id="userName" placeholder="{i18n>Commom.User}" value="{/UserName}"></Input>
 					<Input id="userPass" placeholder="{i18n>Commom.Password}" type="Password" value="{/Password}" ></Input>
 					<Button id="loginButton" width="11rem" text="{i18n>Commom.Login}" type="Emphasized" press="onLogin"></Button>

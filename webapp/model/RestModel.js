@@ -57,5 +57,7 @@ sap.ui.model.json.JSONModel.extend("app.model.RestModel", {
     delete:function(url, fnSuccess, fnerror, dataType="json"){
 		this.request("DELETE",url, fnSuccess , fnerror, null, null, dataType);
 	},
+
+	
 	
 });

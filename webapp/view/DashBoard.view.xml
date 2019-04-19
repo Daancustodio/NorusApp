@@ -8,6 +8,7 @@
 	controllerName="app.controller.DashBoard">
 
  	<ObjectPageLayout
+	 backgroundDesignAnchorBar="Transparent"
 	 subSectionLayout="titleOnTop"
 	 id="idApprovalsRequestPurchase"  
 	 class="sapThemePageBG-asColor"	 
@@ -15,10 +16,10 @@
 	 <headerTitle>
 			<ObjectPageHeader objectImageURI=''
 							  id="idApprovalsRequestPurchaseHeader"
-							  objectTitle="{path:'currentUser>/U_NAME', formatter:'.fmt.formatCaptalize'}"
+							  objectTitle="{path:'currentUser>/UserName', formatter:'.fmt.formatCaptalize'}"
 							  objectImageShape="Circle"
-							  objectImageAlt="{currentUser>/U_NAME}"
-							  objectSubtitle="{currentUser>/DepartmentName}"
+							  objectImageAlt="{currentUser>/UserName}"
+							  objectSubtitle="{currentUser>/Company}"
 							  isObjectIconAlwaysVisible="false"
 							  isObjectTitleAlwaysVisible="true"
 							  isObjectSubtitleAlwaysVisible="true">
@@ -31,12 +32,14 @@
 			<ObjectPageSection title="{i18n>Commom.Home}">
 				<ObjectPageSubSection  >
 					<blocks>
+					
 						<l:HorizontalLayout 
 							allowWrapping="true" 
 							id="containerTile" 
 							content="{/}">
 							<m:GenericTile 
 							header="{title}" 
+							backgroundImage="webapp/img/gestor-de-vendas.jpg"
 							subheader="{info}"
 							app:route="{route}"
 							state="Loaded" 							
@@ -44,12 +47,7 @@
 								<m:TileContent 
 									unit="{numberUnit}" 
 									footer="{footer}">
-									<m:NumericContent 
-									icon="{icon}" 
-									value="{number}" 
-									valueColor="{color}" 
-									indicator="{trend}" 
-									scale="{scale}" />
+									
 								</m:TileContent>
 							</m:GenericTile>
 						</l:HorizontalLayout>

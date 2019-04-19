@@ -6,3 +6,8 @@
 .sapMSLITitle, .sapMSLITitleOnly, .sapMSLIDescription{
 	white-space: normal !important;
 }
+.imgLogo{
+	margin: 0 auto;
+	display: block;
+	max-width: 50%;
+}
