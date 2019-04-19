@@ -34,7 +34,7 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
             startMonth : "",
             months : 0
         },
-        contractURL: "http://localhost:5000/api/contract",       
+        contractURL: "https://norusserver.azurewebsites.net",       
         _onRouteMatched : function(oEvent){ 
             this.setModel(new RestModel(this.emptyContract
             ), "Contract") ;         
