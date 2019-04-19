@@ -2,3 +2,8 @@
 	min-height: 7rem !important;
 	height: 7rem !important;
 }
+
+.sapMSLITitle, .sapMSLITitleOnly, .sapMSLIDescription{
+	
+	white-space: normal;
+}
