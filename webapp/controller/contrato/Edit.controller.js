@@ -34,7 +34,9 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
             startMonth : "",
             months : 0
         },
-        contractURL: "https://norusserver.azurewebsites.net/api/contract",       
+        contractURL: "http://localhost:5000/api/contract",       
+        rootApi: "http://localhost:5000/api/",       
+        //contractURL: "https://norusserver.azurewebsites.net/api/contract",       
         _onRouteMatched : function(oEvent){ 
             this.setModel(new RestModel(this.emptyContract
             ), "Contract") ;         
@@ -202,6 +204,26 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
                 })
             
 
+        },
+
+        onCreatePdf(oEvent){            
+            let list = this.byId("idList");
+            let selection = list.getSelectedContexts();
+            let data =selection.map(x=> x.getObject());
+            let model = new RestModel();
+            let url = this.rootApi + "pdf";
+            model.setData(data);
+            oEvent.getSource().setBusy(true);
+            model.post(
+                url,
+                data =>{
+                    
+                    var win = window.open("data", "Your PDF", "width=1024,height=768,resizable=yes,scrollbars=yes,toolbar=no,location=no,directories=no,status=no,menubar=no,copyhistory=no");
+                    win.document.location.href = datauri;
+                    console.log(data)
+                },
+                console.log
+            );
         }
         
         

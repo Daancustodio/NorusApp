@@ -129,7 +129,7 @@
 										enabled="false"
 										icon="sap-icon://pdf-reader"
 										tooltip="Exportar PDF"
-										press="onExport" />
+										press="onCreatePdf" />
                                     <Button
 										id="excluir"
 										enabled="false"
