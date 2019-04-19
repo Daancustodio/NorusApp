@@ -1,8 +1,6 @@
 .vs
-.vscode
-*/bin
-*/obj
+.vscode */bin */obj
 .lib/*
-node_modules/*
+node_modules/* 
 dist/*
 
