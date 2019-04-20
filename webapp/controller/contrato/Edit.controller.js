@@ -55,7 +55,7 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
             this.updatePdfLink();
         },
         onExportHTML(){
-
+            window.open(this.pdfUrl, "_blank")
         },
         exportPDF(oEvent){
             let button = oEvent.getSource();
