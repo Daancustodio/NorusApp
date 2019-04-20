@@ -180,6 +180,13 @@
 										tooltip="Exportar"
 										text="Exportar arquivo PDF"
                                        	press="exportHTML" />
+                                    <Button										
+                                        id="exportar"
+										enabled="false"
+										icon="sap-icon://pdf-attachment"
+										tooltip="Exportar"
+										text="Exportar para HMTL"
+                                       	press="exportHTML" />
                                     
                                 
                             </l:content>
