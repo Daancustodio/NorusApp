@@ -57,9 +57,9 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
 
         exportHTML(oEvent){
             let button = oEvent.getSource();
-            button.setBusy(true);
             let id = "#" + this.getView().getId()+"--htmlRelatoio";
             let htmlDoc = document.querySelector(id);
+            button.setBusy(true);
             html2canvas(htmlDoc, {
                 width : 700
             }).then((canvas) => {
