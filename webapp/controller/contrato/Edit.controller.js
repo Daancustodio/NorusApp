@@ -96,6 +96,7 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
             let enable = (selectionCount > 0)
             this.byId("excluir").setEnabled(enable);
             this.byId("exportar").setEnabled(enable);
+            this.byId("exportarHtml").setEnabled(enable);
             this.byId("edit").setEnabled(selectionCount == 1)
         },
        
@@ -209,7 +210,7 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
             this.byId("cancelButton").setVisible(enableCancel);
             
             if(key == "relatorio")
-            this.onExportPDF();
+                this.onExportPDF();
             
             if(!isListTab) return;
             

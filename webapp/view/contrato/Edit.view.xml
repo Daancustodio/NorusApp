@@ -181,7 +181,7 @@
 										text="Exportar arquivo PDF"
                                        	press="exportPDF" />
                                     <Button										
-                                        id="exportar"
+                                        id="exportarHtml"
 										enabled="false"
 										icon="sap-icon://pdf-attachment"
 										tooltip="Exportar"
