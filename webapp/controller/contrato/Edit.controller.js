@@ -61,7 +61,7 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
             let htmlDoc = document.querySelector(id);
             button.setBusy(true);
             html2canvas(htmlDoc, {
-                width : 600
+                width : 650
             }).then((canvas) => {
                 button.setBusy(false);
                 var img=canvas.toDataURL("image/png");
