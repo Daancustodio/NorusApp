@@ -79,7 +79,8 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
             jQuery.ajax({
                 url: this.pdfUrl,
                 success : (data)=>{
-                    let htmlDoc = document.querySelector("#__xmlview1--htmlRelatoio");
+                    let id = "#" + this.getView().getId()+"--htmlRelatoio";
+                    let htmlDoc = document.querySelector(id);
                     htmlDoc.innerHTML = "";
                     htmlDoc.innerHTML = data;                    
                 }
@@ -97,6 +98,7 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
        
         
         load(){
+            
             let model = new RestModel();
             let list = this.byId("idList");
             list.setBusy(true);            
@@ -106,8 +108,7 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
                 model.setData(data)
             },
             err =>{
-                list.setBusy(false);                
-                this.showExeption(err);
+                this.load();
             })
         },
         log(){
@@ -256,7 +257,7 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
             relatiorioTab.setEnabled(enableRelatorio)
             this.pdfUrl = this.rootApi + "html/" + data + "/"+ this.getUserSession().UserName;            
         },
-        
+
         onSelectAll: function(oEvent) {            
             var bSelected = oEvent.getParameter('selected'); 
             this.selectAll(bSelected);            
