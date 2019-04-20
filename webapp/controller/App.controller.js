@@ -4,11 +4,11 @@ sap.ui.define(
 		"sap/m/MessageToast",	
 		"sap/ui/model/json/JSONModel",	
 		"app/model/RestModel",
-		"app/model/formatter",
-        "app/controller/fragments/Notification.controller",
+		"app/model/formatter"
+        
 
 	],
-	function (BaseController, MessageToast, JSONModel, RestModel, formatter,NotificationController) {
+	function (BaseController, MessageToast, JSONModel, RestModel, formatter) {
 	"use strict";
 
 	return BaseController.extend("app.controller.App", {
