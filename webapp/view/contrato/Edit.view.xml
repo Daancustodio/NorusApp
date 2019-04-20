@@ -169,7 +169,9 @@
                     <IconTabFilter enabled="false" id="tabFilterRelatorio" key="relatorio" icon="sap-icon://print" iconColor="Critical" text="Relatório">
                         <l:Grid defaultSpan="L12 M12 S12" class="sapUiSmallMarginTop">
                             <l:content>
-                                    <html:div id="htmlRelatoio" width="700px" min-width="700px"> 
+                                    <html:div id="relatiorioContainer" width="700px" min-width="700px"> 
+                                        <html:div id="htmlRelatoio" > 
+                                        </html:div>
                                     </html:div>
                                     <Button										
                                         id="exportar"
