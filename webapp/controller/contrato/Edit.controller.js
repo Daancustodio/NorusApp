@@ -54,8 +54,10 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
             this.enableExpordAndExclude();                  
             this.updatePdfLink();
         },
+        onExportHTML(){
 
-        exportHTML(oEvent){
+        },
+        exportPDF(oEvent){
             let button = oEvent.getSource();
             let id = "#" + this.getView().getId()+"--htmlRelatoio";
             let htmlDoc = document.querySelector(id);
@@ -76,7 +78,7 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
             });
         },
 
-        onExportHTML(){
+        onExportPDF(){
             jQuery.ajax({
                 url: this.pdfUrl,
                 success : (data)=>{
@@ -207,7 +209,7 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
             this.byId("cancelButton").setVisible(enableCancel);
             
             if(key == "relatorio")
-            this.onExportHTML();
+            this.onExportPDF();
             
             if(!isListTab) return;
             

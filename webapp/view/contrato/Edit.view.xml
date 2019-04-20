@@ -179,14 +179,14 @@
 										icon="sap-icon://pdf-attachment"
 										tooltip="Exportar"
 										text="Exportar arquivo PDF"
-                                       	press="exportHTML" />
+                                       	press="exportPDF" />
                                     <Button										
                                         id="exportar"
 										enabled="false"
 										icon="sap-icon://pdf-attachment"
 										tooltip="Exportar"
 										text="Exportar para HMTL"
-                                       	press="exportHTML" />
+                                       	press="onExportHTML" />
                                     
                                 
                             </l:content>
