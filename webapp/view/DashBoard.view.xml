@@ -16,7 +16,7 @@
 	 <headerTitle>
 			<ObjectPageHeader objectImageURI=''
 							  id="idApprovalsRequestPurchaseHeader"
-							  objectTitle="{path:'currentUser>/UserName', formatter:'.fmt.formatCaptalize'}"
+							  objectTitle="{path:'currentUser>/UserName'}"
 							  objectImageShape="Circle"
 							  objectImageAlt="{currentUser>/UserName}"
 							  objectSubtitle="{currentUser>/Company}"
