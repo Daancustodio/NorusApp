@@ -173,6 +173,7 @@
                                         <html:div id="htmlRelatoio" > 
                                         </html:div>
                                     </html:div>
+                                    <HBox>
                                     <Button										
                                         id="exportar"
 										enabled="false"
@@ -180,13 +181,15 @@
 										tooltip="Exportar"
 										text="Exportar arquivo PDF"
                                        	press="exportPDF" />
-                                    <Button										
+                                    <Button	
+                                    									
                                         id="exportarHtml"
 										enabled="false"
 										icon="sap-icon://pdf-attachment"
 										tooltip="Exportar"
 										text="Exportar para HMTL"
                                        	press="onExportHTML" />
+                                    </HBox>
                                     
                                 
                             </l:content>
