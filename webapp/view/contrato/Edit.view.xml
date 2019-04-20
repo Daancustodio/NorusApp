@@ -2,6 +2,7 @@
 	controllerName="app.controller.contrato.Edit"
     xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns:l="sap.ui.layout"
     xmlns:core="sap.ui.core"
     xmlns="sap.m">
@@ -32,7 +33,7 @@
 									includeItemInSelection="true" >
                             <headerToolbar>
                                 <Toolbar>
-                                    <CheckBox text="Selecionar Todos" select="onSelectAll" />
+                                    <CheckBox id="buttonSelectAll" text="Selecionar Todos" select="onSelectAll" />
                                     <ToolbarSpacer />
 
                                     <Button
@@ -46,13 +47,7 @@
 										enabled="false"
 										icon="sap-icon://delete"
 										tooltip="Excluir"
-										press="onDelete" />
-                                    <Button										
-                                        id="exportar"
-										enabled="false"
-										icon="sap-icon://pdf-attachment"
-										tooltip="Exportar"
-                                       	press="onExportPdf" />
+										press="onDelete" />                                   
                                     
                                 </Toolbar>
                             </headerToolbar>
@@ -85,8 +80,8 @@
                         </List>
                     </IconTabFilter>
                     <IconTabSeparator />
-                    <IconTabFilter id="tabFilterAdd" key="add" icon="sap-icon://add-document" iconColor="Positive" text="{oView>/FilterLabel}">
-                        <l:Grid defaultSpan="L4 M6 S12" class="sapUiSmallMarginTop">
+                    <IconTabFilter  id="tabFilterAdd" key="add" icon="sap-icon://add-document" iconColor="Positive" text="{oView>/FilterLabel}">
+                        <l:Grid defaultSpan="L4 M12 S12" class="sapUiSmallMarginTop">
                             <l:content>
                                 <Panel width="auto"  accessibleRole="Region">
                                     <headerToolbar>
@@ -167,6 +162,23 @@
                                         </VBox>
                                     </content>
                                 </Panel>
+                            </l:content>
+                        </l:Grid>
+                    </IconTabFilter>
+                    <IconTabFilter enabled="false" id="tabFilterRelatorio" key="relatorio" icon="sap-icon://print" iconColor="Critical" text="Relatório">
+                        <l:Grid defaultSpan="L12 M12 S12" class="sapUiSmallMarginTop">
+                            <l:content>
+                                    <html:div id="htmlRelatoio"> 
+                                    </html:div>
+                                    <Button										
+                                        id="exportar"
+										enabled="false"
+										icon="sap-icon://pdf-attachment"
+										tooltip="Exportar"
+										text="Exportar arquivo PDF"
+                                       	press="exportHTML" />
+                                    
+                                
                             </l:content>
                         </l:Grid>
                     </IconTabFilter>

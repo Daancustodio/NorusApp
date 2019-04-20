@@ -46,7 +46,7 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
                 {Id: 1, Description: "Venda"}
             ]), "oContractTypes") ;  
         
-        this.setModel(new JSONModel({FilterLabel: "Criar", pdfUrl : ""}), "oView");  
+            this.setModel(new JSONModel({FilterLabel: "Criar", pdfUrl : ""}), "oView");  
            
             
         },
@@ -54,8 +54,37 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
             this.enableExpordAndExclude();                  
             this.updatePdfLink();
         },
-        onExportPdf(){
-            window.open(this.pdfUrl,"_blank");
+
+        exportHTML(oEvent){
+            let button = oEvent.getSource();
+            button.setBusy(true);
+            let htmlDoc = document.querySelector("#__xmlview1--htmlRelatoio");
+            html2canvas(htmlDoc, {
+                width : 700
+            }).then((canvas) => {
+                button.setBusy(false);
+                var img=canvas.toDataURL("image/png");
+                var doc = new jsPDF({
+                    unit: 'px',
+                });
+                doc.addImage(img,'JPEG',20,20);
+                doc.save('relatorioContratosNorus.pdf');
+                }
+            ).catch(err =>{
+                button.setBusy(false)
+            });
+        },
+
+        onExportHTML(){
+            jQuery.ajax({
+                url: this.pdfUrl,
+                success : (data)=>{
+                    let htmlDoc = document.querySelector("#__xmlview1--htmlRelatoio");
+                    htmlDoc.innerHTML = "";
+                    htmlDoc.innerHTML = data;                    
+                }
+
+            })
             
         },
         enableExpordAndExclude(){
@@ -84,6 +113,7 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
         log(){
             console.log(this.getModel("Contracts").getData())
         },
+
         onEdit(oEvent){
             let selection =this.byId("idList").getSelectedContexts().map(x => x.getObject())[0];
             if(!selection)
@@ -99,6 +129,7 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
             let icon = this.byId("tabFilterAdd").setIcon("sap-icon://request");
             this.updateButtons(true);
         },
+
         updateButtons(edit){
             let filter = this.byId("filterAdd");
             this.getModel("oView").setProperty('/FilterLabel', "Editar");
@@ -125,68 +156,75 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
             else
                 this.sendPost(model);
             
-            },
-            sendPost(model){
-                model.post(this.contractURL, 
-                    data =>{
-                        this.successPost(model, "Contrado adicionado com sucesso.");
-                    },
-                    err =>{
-                        if(err.statusCode == 200) 
-                        this.successPost(model);
-                        else{
-                            this.showExeption(err)
-                        }
-                    })
-            },
-            sendPut(model){
-                let url = this.contractURL + "/edit";
-                model.post(url, 
-                    data =>{
-                        this.successPost(model, "Contrado atualizado com sucesso.");
-                    },
-                    err =>{
-                        if(err.statusCode == 200) 
-                        this.successPost(model);
-                        else{
-                            this.showExeption(err)
-                        }
-                    })
-            },
-            successPost(model, msg){
-                MessageToast.show(msg);
-                model.setData({});
-                this.load();           
-                this.byId("idIconTabBar").setSelectedKey("list")
-                this.getModel("oView").setProperty('/FilterLabel', "Criar");
-                this.byId("cancelButton").setVisible(false);
-                this.byId("tabFilterAdd").setIcon("sap-icon://add-document");
-    
-                return;
-            },
-            
-            onChangeTab(oEvent){                
-                let key = oEvent.getParameters().key;                
-                let isListTab = (key == "list");  
-                this.byId("saveButton").setVisible(!isListTab);
-                let mode =  this.getModel("oView").getProperty('/FilterLabel');
-
-                var enableCancel = (!isListTab && mode == "Editar")
-                this.byId("cancelButton").setVisible(enableCancel);
-
-                if(!isListTab) return;
-
-                
-                this.byId("cancelButton").setVisible(false);
-                
-                this.load()
-            
         },
+        sendPost(model){
+            model.post(this.contractURL, 
+                data =>{
+                    this.successPost(model, "Contrado adicionado com sucesso.");
+                },
+                err =>{
+                    if(err.statusCode == 200) 
+                    this.successPost(model);
+                    else{
+                        this.showExeption(err)
+                    }
+                })
+        },
+        sendPut(model){
+            let url = this.contractURL + "/edit";
+            model.post(url, 
+                data =>{
+                    this.successPost(model, "Contrado atualizado com sucesso.");
+                },
+                err =>{
+                    if(err.statusCode == 200) 
+                    this.successPost(model);
+                    else{
+                        this.showExeption(err)
+                    }
+                })
+        },
+        successPost(model, msg){
+            MessageToast.show(msg);
+            model.setData({});
+            this.load();           
+            this.byId("idIconTabBar").setSelectedKey("list")
+            this.getModel("oView").setProperty('/FilterLabel', "Criar");
+            this.byId("cancelButton").setVisible(false);
+            this.byId("tabFilterAdd").setIcon("sap-icon://add-document");
+
+            return;
+        },
+
+        onChangeTab(oEvent){                
+            let key = oEvent.getParameters().key;                
+            let isListTab = (key == "list");  
+            this.byId("saveButton").setVisible(!isListTab);
+            let mode =  this.getModel("oView").getProperty('/FilterLabel');
+            var enableCancel = (!isListTab && mode == "Editar")
+            this.byId("cancelButton").setVisible(enableCancel);
+            
+            if(key == "relatorio")
+            this.onExportHTML();
+            
+            if(!isListTab) return;
+            
+            let buttonSelectAll = this.byId("buttonSelectAll");
+            this.selectAll(false);
+            buttonSelectAll.setSelected(false)
+            
+            this.byId("cancelButton").setVisible(false);
+            
+            this.load()
+        
+        },
+
         onValueChange(oEvent){
             let value = parseFloat(oEvent.getParameters().value).toFixed(2);
             console.log(value)
             oEvent.getSource().setValue(value)
         },
+
         onDelete(oEvent){
             let list = this.byId("idList");
             let selection = list.getSelectedContexts();
@@ -213,19 +251,27 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
             let list = this.byId("idList");
             let selection = list.getSelectedContexts();
             let data = selection.map(x=> x.getObject().id).join(";");
+            let enableRelatorio = (selection.length > 0);
+            let relatiorioTab=this.byId("tabFilterRelatorio");
+            relatiorioTab.setEnabled(enableRelatorio)
             this.pdfUrl = this.rootApi + "html/" + data + "/"+ this.getUserSession().UserName;            
         },
-        onSelectAll: function(oEvent) {
-            var otab = this.byId("idList"); 
-    
+        
+        onSelectAll: function(oEvent) {            
             var bSelected = oEvent.getParameter('selected'); 
-    
+            this.selectAll(bSelected);            
+        },
+        
+        selectAll(selected){
+            var otab = this.byId("idList"); 
             otab.getItems().forEach(function(item) { 
-                item.setSelected(bSelected); 
+                if(!item.getSelected())
+                    item.setSelected(selected); 
             });
-
+            
             this.enableExpordAndExclude();
             this.updatePdfLink();
+
         }
         
         

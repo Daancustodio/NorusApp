@@ -27,12 +27,7 @@ sap.ui.define(
 			
 		},
 
-		//Interceptar Chamadas a API para alterar ou abortar se necessário
-	
 		
-
-		
-		//Session Logout
 		onLoginPopOver : function(oEvent){
 			if(!this.getUserSession()){
 				MessageToast.show(this.getText("Commom.NoLoggedUser"));				
