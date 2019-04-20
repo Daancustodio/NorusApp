@@ -182,7 +182,7 @@
 										text="Exportar arquivo PDF"
                                        	press="exportPDF" />
                                     <Button	
-                                    									
+                                    	class="sapUiTinyMarginBegin"								
                                         id="exportarHtml"
 										enabled="false"
 										icon="sap-icon://pdf-attachment"
