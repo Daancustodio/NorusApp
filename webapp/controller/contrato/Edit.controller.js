@@ -69,7 +69,7 @@ function (BaseController, JSONModel, Device, MessageToast, MessageBox, BusyIndic
                     unit: 'px',
                 });
                 doc.addImage(img,'JPEG',20,20);
-                doc.save('relatorioContratosNorus.pdf');
+                doc.save('RelatorioContratosNorus.pdf');
                 }
             ).catch(err =>{
                 button.setBusy(false)
